@@ -7,8 +7,8 @@ import { send as xmtp } from './xmtp';
 export default [
   // Comment a line to disable a provider
   webhook,
-  discord,
+  // discord,
   // beams,
-  xmtp,
-  walletconnectNotify
+  // xmtp,
+  // walletconnectNotify
 ];

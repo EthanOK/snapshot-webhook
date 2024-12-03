@@ -80,9 +80,9 @@ async function processEvents() {
       proposal = await getProposal(proposalId);
     }
     if (proposal) {
-      const subscribers = await getSubscribers(event.space);
+      // const subscribers = await getSubscribers(event.space);
       providers.forEach(provider => {
-        provider(event, proposal, subscribers);
+        provider(event, proposal, "subscribers");
       });
     } else {
       console.log(`[events] Proposal ${proposalId} not found`);

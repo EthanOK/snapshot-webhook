@@ -9,9 +9,16 @@ const hubURL = process.env.HUB_URL || 'https://hub.snapshot.org';
 export let last_mci = 0;
 
 async function getLastMci() {
-  const query = 'SELECT value FROM _metadatas WHERE id = ? LIMIT 1';
-  const results = await db.queryAsync(query, ['last_mci']);
-  last_mci = parseInt(results[0].value);
+  try {
+    const query = 'SELECT value FROM _metadatas WHERE id = ? LIMIT 1';
+    const results = await db.queryAsync(query, ['last_mci']);
+    last_mci = parseInt(results[0].value);
+  } catch (error) {
+    await db.queryAsync('INSERT INTO _metadatas (id, value) VALUES (?, ?)', [
+      'last_mci',
+      last_mci
+    ]);
+  }
   return last_mci;
 }
 
